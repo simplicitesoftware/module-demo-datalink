@@ -1,0 +1,28 @@
+{
+ "object": "Module",
+ "userkey": "DemoDataLink",
+ "item": {
+  "mdl_name": "DemoDataLink",
+  "mdl_prefix": null,
+  "mdl_version": "1",
+  "mdl_type": null,
+  "mdl_url": "{\n\t\"type\": \"git\",\n\t\"origin\": {\n\t\t\"uri\": \"https://github.com/simplicitesoftware/module-demo-datalink.git\"\n\t}\n}",
+  "mdl_comment": "[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=simplicite-modules-DemoProject&metric=alert_status)](https://sonarcloud.io/dashboard?id=simplicite-modules-DemoProject)\n\n### Introduction\n\nThis is an addon to demo **order management** application to explain the **DataLink** mecanisms\n- Between 2 hosts = 2 instances of the platform\n- The instances must have the Demo installed, or at least the 2 object definitions: `DemoSupplier` and `DemoProduct`\n- The DetaLink synchronises those objects between a master and a slave host\n\t- Slave is notified on the fly when the master updates those objetcs thru synchronous API calls\n\t- A cron job will make a resync from the last scan/timestamp if the slave is not available\n\n### Import\n\nTo import this DataLink demo:\n\n- First install the module `Demo` in 2 isolated instances (V5.3+)\n- Create for each a module named `DemoDataLink`\n- Set the settings as:\n\n```json\n{\n\t\"type\": \"git\",\n\t\"origin\": {\n\t\t\"uri\": \"https://github.com/simplicitesoftware/module-demo-datalink.git\"\n\t}\n}\n```\n\n- Click on the _Import module_ button\n\n### Configure\n\nOpen the DataLink from the menu (operation or settings) to change the Hosts URL/credentials\n\n- Host name:\n\t- same as the `SERVER_URL` or `DIRECT_URL` to be accessed from a public URL by API\n\t- or a logical name forced on statup with `setApplicationName(\"myAppName\")` in the PlatformHooks (needs to restart the server)\n- URL : the public URL to application (ex `https//myapp.domain.com`)\n- User/Password: \n\t- API credentials to get a token during first call\n\t- The user must have full access to `DemoSupplier` and `DemoProduct` (default is designer)\n\nMake sur the Crontab contains the `DataLink` job and activate it.\n\nMake sure `USE_API` services is availbale.\n\nClear the platforms cached.\n\n### Test\n\n- Create, update or delete Suppliers/Products on the master with admo, profile.\n- Checks on the salve host that updates are applied automatically to local data\n\n### Quality\n\nThis module can be analysed by the **SonarQube** analysis tool\nusing this command:\n\n```bash\nmvn verify sonar:sonar\n```"
+ },
+ "links": [{
+  "object": "DataLink",
+  "label": "Data links",
+  "icon": "database",
+  "field": "row_module_id",
+  "list": [{
+   "object": "DataLink",
+   "userkey": "DemoDLProduct",
+   "item": {
+    "dlk_name": "DemoDLProduct",
+    "row_module_id__mdl_name": "DemoDataLink",
+    "dlk_enabled": true,
+    "dlk_order": 10
+   }
+  }]
+ }]
+}
