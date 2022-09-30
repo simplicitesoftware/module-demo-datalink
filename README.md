@@ -48,6 +48,16 @@ Open the DataLink from the menu (operation or settings) to change the Hosts URL/
 - Host name:
 	- same as the `SERVER_URL` or `DIRECT_URL` to be accessed from a public URL by API
 	- or a logical name forced on statup with `setApplicationName("myAppName")` in the PlatformHooks (needs to restart the server)
+
+```java
+public class PlatformHooks extends com.simplicite.util.engine.PlatformHooksInterface {
+	public String postPlatformInit(Grant sys) {
+		Globals.setApplicationName("SLAVE_NAME");
+		return null;
+	}
+}
+```
+
 - URL : the public URL to application (ex `https//myapp.domain.com`)
 - User/Password: 
 	- API credentials to get a token during first call
