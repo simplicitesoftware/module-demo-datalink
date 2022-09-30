@@ -15,7 +15,7 @@
 
 ### Introduction
 
-This is an addon to demo **order management** application to explain the **DataLink** mecanisms
+This is an addon to demo **order management** application to explain the **DataLink** behavior:
 - Between 2 hosts = 2 instances of the platform
 - The instances must have the Demo installed, or at least the 2 object definitions: `DemoSupplier` and `DemoProduct`
 - The DetaLink synchronises those objects between a master and a slave host
@@ -47,12 +47,12 @@ Open the DataLink from the menu (operation or settings) to change the Hosts URL/
 
 - Host name:
 	- same as the `SERVER_URL` or `DIRECT_URL` to be accessed from a public URL by API
-	- or a logical name forced on statup with `setApplicationName("myAppName")` in the PlatformHooks (needs to restart the server)
+	- or a logical name forced on startup with `setApplicationName("myAppName")` in the PlatformHooks (needs to restart the server)
 
 ```java
 public class PlatformHooks extends com.simplicite.util.engine.PlatformHooksInterface {
 	public String postPlatformInit(Grant sys) {
-		Globals.setApplicationName("SLAVE_NAME");
+		Globals.setApplicationName("SLAVE_NAME" /* or "MASTER_NAME" */);
 		return null;
 	}
 }
@@ -63,15 +63,15 @@ public class PlatformHooks extends com.simplicite.util.engine.PlatformHooksInter
 	- API credentials to get a token during first call
 	- The user must have full access to `DemoSupplier` and `DemoProduct` (default is designer)
 
-Make sur the Crontab contains the `DataLink` job and activate it.
+Make sure the Crontab contains the `DataLink` job and activate it to desired times.
 
-Make sure `USE_API` services is availbale.
+Make sure `USE_API` services is available.
 
-Clear the platforms cached.
+Clear the platforms cache.
 
 ### Test
 
-- Create, update or delete Suppliers/Products on the master with admo, profile.
+- Create, update or delete Suppliers/Products on the master with admin profile.
 - Checks on the salve host that updates are applied automatically to local data
 
 ### Quality
