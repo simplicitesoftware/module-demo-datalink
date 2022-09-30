@@ -58,21 +58,22 @@ public class PlatformHooks extends com.simplicite.util.engine.PlatformHooksInter
 }
 ```
 
-- URL : the public URL to application (ex `https//myapp.domain.com`)
+- URL : the public URL to application (ex `https://myapp.domain.com`)
 - User/Password: 
-	- API credentials to get a token during first call
-	- The user must have full access to `DemoSupplier` and `DemoProduct` (default is designer)
+	- API credentials to get a token from slave instance
+	- The user must have full access to `DemoSupplier` and `DemoProduct` (designer is granted)
 
 Make sure the Crontab contains the `DataLink` job and activate it to desired times.
 
 Make sure `USE_API` services is available.
 
-Clear the platforms cache.
+Clear the platforms caches.
 
 ### Test
 
-- Create, update or delete Suppliers/Products on the master with admin profile.
-- Checks on the salve host that updates are applied automatically to local data
+- Create, update or delete Suppliers/Products on the master with admin profile
+- Check on the salve host that updates are applied automatically to local data
+- See server logs on both sides to audit issues
 
 ### Quality
 
